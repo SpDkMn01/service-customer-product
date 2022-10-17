@@ -41,7 +41,7 @@ public class CustomerProductActiveController {
         if (Objects.isNull(result)) {
             //lanzar throw personalizado
         }
-        return customerProductActiveService.save(customerProductActiveDtoRequestMono);
+        return service.save(requestMono);
     }
     @PutMapping("/update/{id}")
     public Mono<CustomerProductActiveDtoResponse> update(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono, @PathVariable String id)

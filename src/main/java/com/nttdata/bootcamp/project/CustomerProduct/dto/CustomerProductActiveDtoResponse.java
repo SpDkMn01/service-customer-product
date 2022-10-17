@@ -12,7 +12,7 @@ public class CustomerProductActiveDtoResponse
     private String id;
     private String customerUrl;
     private String productUrl;
-    private double monto;
-    private double deuda;
-    private double limiteCredito;
+    private double amount;
+    private double debt;
+    private double creditLimit;
 }

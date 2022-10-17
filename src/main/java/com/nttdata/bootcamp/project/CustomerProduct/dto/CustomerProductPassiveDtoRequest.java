@@ -4,7 +4,7 @@ public class CustomerProductPassiveDtoRequest
 {
     private String customerId;
     private String productId;
-    private int mantenimiento;
+    private int maintenance;
     private int maxOperationMonth;
     private String dateOperation;
 }

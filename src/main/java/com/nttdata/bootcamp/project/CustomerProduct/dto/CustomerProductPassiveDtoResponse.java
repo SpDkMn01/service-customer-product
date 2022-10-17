@@ -12,7 +12,7 @@ public class CustomerProductPassiveDtoResponse
     private String id;
     private String customerUrl;
     private String productUrl;
-    private int mantenimiento;
+    private int maintenance;
     private int maxOperationMonth;
     private String dateOperation;
 }

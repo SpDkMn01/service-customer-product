@@ -11,7 +11,7 @@ public class CustomerProductActiveDtoRequest
 {
     private String customerId;
     private String productId;
-    private double monto;
-    private double deuda;
-    private double limiteCredito;
+    private double amount;
+    private double debt;
+    private double creditLimit;
 }
