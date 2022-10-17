@@ -19,13 +19,15 @@ import reactor.core.publisher.Mono;
 public class CustomerProductPassiveController {
     /*
     @GetMapping
-    public Flux<ProductDtoResponse> getCustomerProducts()
+    public Mono<List<ProductDtoResponse>> getCustomerProducts()
     {
         WebClient client = WebClient.create("http://localhost:8001/");
         return client.get()
                 .uri("api/v1/products")
                 .retrieve()
-                .bodyToFlux(ProductDtoResponse.class);
+                .bodyToFlux(ProductDtoResponse.class)
+                .collectionList()
+                .block();
     }
      */
     @Autowired
