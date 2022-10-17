@@ -1,9 +1,6 @@
 package com.nttdata.bootcamp.project.CustomerProduct.controller;
 
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDtoRequest;
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDtoResponse;
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoResponse;
+import com.nttdata.bootcamp.project.CustomerProduct.dto.*;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductActiveService;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductPassiveService;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,6 +35,12 @@ public class CustomerProductActiveController {
     @PostMapping
     public Mono<CustomerProductActiveDtoResponse> saveCustomerProductActive(@RequestBody Mono<CustomerProductActiveDtoRequest> customerProductActiveDtoRequestMono)
     {
+        String uri = "http://localhost:8094/api/v1/customers/63484f54098ba16f2bbe2439";
+        RestTemplate restTemplate = new RestTemplate();
+        CustomerGetByIdResponse result = restTemplate.getForObject(uri, CustomerGetByIdResponse.class);
+        if (Objects.isNull(result)) {
+            //lanzar throw personalizado
+        }
         return customerProductActiveService.save(customerProductActiveDtoRequestMono);
     }
     @PutMapping("/update/{id}")
