@@ -2,7 +2,7 @@ package com.nttdata.bootcamp.project.CustomerProduct.controller;
 
 import com.nttdata.bootcamp.project.CustomerProduct.dto.*;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductActiveService;
-import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductPassiveService;
+import com.nttdata.bootcamp.project.CustomerProduct.service.ICustomerProductActiveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,19 +21,19 @@ import java.util.Objects;
 @RefreshScope
 public class CustomerProductActiveController {
     @Autowired
-    private CustomerProductActiveService customerProductActiveService;
+    private ICustomerProductActiveService service;
     @GetMapping
-    public Flux<CustomerProductActiveDtoResponse> getCustomerProductActives()
+    public Flux<CustomerProductActiveDtoResponse> getAll()
     {
-        return customerProductActiveService.getAll();
+        return service.getAll();
     }
     @GetMapping(path="/{id}")
-    public Mono<CustomerProductActiveDtoResponse> getCustomerProductActive(@PathVariable String id)
+    public Mono<CustomerProductActiveDtoResponse> getById(@PathVariable String id)
     {
-        return customerProductActiveService.getById(id);
+        return service.getById(id);
     }
     @PostMapping
-    public Mono<CustomerProductActiveDtoResponse> saveCustomerProductActive(@RequestBody Mono<CustomerProductActiveDtoRequest> customerProductActiveDtoRequestMono)
+    public Mono<CustomerProductActiveDtoResponse> save(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono)
     {
         String uri = "http://localhost:8094/api/v1/customers/63484f54098ba16f2bbe2439";
         RestTemplate restTemplate = new RestTemplate();
@@ -44,13 +44,13 @@ public class CustomerProductActiveController {
         return customerProductActiveService.save(customerProductActiveDtoRequestMono);
     }
     @PutMapping("/update/{id}")
-    public Mono<CustomerProductActiveDtoResponse> updateCustomerProductActive(@RequestBody Mono<CustomerProductActiveDtoRequest> customerProductActiveDtoRequestMono, @PathVariable String id)
+    public Mono<CustomerProductActiveDtoResponse> update(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono, @PathVariable String id)
     {
-        return customerProductActiveService.update(customerProductActiveDtoRequestMono,id);
+        return service.update(requestMono,id);
     }
     @DeleteMapping("/delete/{id}")
-    public Mono<Void> deleteCustomerProductActive(@PathVariable String id)
+    public Mono<Void> delete(@PathVariable String id)
     {
-        return customerProductActiveService.delete(id);
+        return service.delete(id);
     }
 }

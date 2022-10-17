@@ -3,10 +3,13 @@ package com.nttdata.bootcamp.project.CustomerProduct.utils;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoResponse;
 import com.nttdata.bootcamp.project.CustomerProduct.entity.CustomerProductPassive;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-
+@AllArgsConstructor
 public class CustomerProductPassiveMapper implements ICustomerProductPassiveMapper
 {
+    private String uri;
+    private String uri2;
     @Override
     public CustomerProductPassiveDtoRequest toDtoRequest(CustomerProductPassive customerProductPassive) {
         CustomerProductPassiveDtoRequest customerProductPassiveDtoRequest = new CustomerProductPassiveDtoRequest();
@@ -25,8 +28,8 @@ public class CustomerProductPassiveMapper implements ICustomerProductPassiveMapp
     public CustomerProductPassiveDtoResponse toDtoResponse(CustomerProductPassive customerProductPassive) {
         CustomerProductPassiveDtoResponse customerProductPassiveDtoResponse = new CustomerProductPassiveDtoResponse();
         BeanUtils.copyProperties(customerProductPassive, customerProductPassiveDtoResponse);
-        customerProductPassiveDtoResponse.setCustomerUrl("/api/v1/customers/" + customerProductPassive.getCustomerId());
-        customerProductPassiveDtoResponse.setProductUrl("/api/v1/products/" + customerProductPassive.getProductId());
+        customerProductPassiveDtoResponse.setCustomerUrl(uri + customerProductPassive.getCustomerId());
+        customerProductPassiveDtoResponse.setProductUrl(uri2 + customerProductPassive.getProductId());
         return customerProductPassiveDtoResponse;
     }
 }
