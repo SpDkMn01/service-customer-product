@@ -1,7 +1,7 @@
 package com.nttdata.bootcamp.project.CustomerProduct.dto;
 
-public class CustomerProductPassiveDtoRequest {
-    private String id;
+public class CustomerProductPassiveDtoRequest
+{
     private String customerId;
     private String productId;
     private int mantenimiento;

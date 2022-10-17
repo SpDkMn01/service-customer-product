@@ -3,6 +3,7 @@ package com.nttdata.bootcamp.project.CustomerProduct.controller;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoResponse;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductPassiveService;
+import com.nttdata.bootcamp.project.CustomerProduct.service.ICustomerProductPassiveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,44 +18,31 @@ import reactor.core.publisher.Mono;
 @RequestMapping("${message.path-customerProductPassive}")
 @RefreshScope
 public class CustomerProductPassiveController {
-    /*
-    @GetMapping
-    public Mono<List<ProductDtoResponse>> getCustomerProducts()
-    {
-        WebClient client = WebClient.create("http://localhost:8001/");
-        return client.get()
-                .uri("api/v1/products")
-                .retrieve()
-                .bodyToFlux(ProductDtoResponse.class)
-                .collectionList()
-                .block();
-    }
-     */
     @Autowired
-    private CustomerProductPassiveService customerProductPassiveService;
+    private ICustomerProductPassiveService service;
     @GetMapping
-    public Flux<CustomerProductPassiveDtoResponse> getCustomerProductPassives()
+    public Flux<CustomerProductPassiveDtoResponse> getAll()
     {
-        return customerProductPassiveService.getAll();
+        return service.getAll();
     }
     @GetMapping(path="/{id}")
-    public Mono<CustomerProductPassiveDtoResponse> getCustomerProductPassive(@PathVariable String id)
+    public Mono<CustomerProductPassiveDtoResponse> getById(@PathVariable String id)
     {
-        return customerProductPassiveService.getById(id);
+        return service.getById(id);
     }
     @PostMapping
-    public Mono<CustomerProductPassiveDtoResponse> saveCustomerProductPassive(@RequestBody Mono<CustomerProductPassiveDtoRequest> customerProductPassiveDtoRequest)
+    public Mono<CustomerProductPassiveDtoResponse> save(@RequestBody Mono<CustomerProductPassiveDtoRequest> requestMono)
     {
-        return customerProductPassiveService.save(customerProductPassiveDtoRequest);
+        return service.save(requestMono);
     }
     @PutMapping("/update/{id}")
-    public Mono<CustomerProductPassiveDtoResponse> updateCustomerProductPassives(@RequestBody Mono<CustomerProductPassiveDtoRequest> CustomerDtoMono, @PathVariable String id)
+    public Mono<CustomerProductPassiveDtoResponse> update(@RequestBody Mono<CustomerProductPassiveDtoRequest> requestMono, @PathVariable String id)
     {
-        return customerProductPassiveService.update(CustomerDtoMono,id);
+        return service.update(requestMono,id);
     }
     @DeleteMapping("/delete/{id}")
-    public Mono<Void> deleteCustomerProductPassives(@PathVariable String id)
+    public Mono<Void> delete(@PathVariable String id)
     {
-        return customerProductPassiveService.delete(id);
+        return service.delete(id);
     }
 }

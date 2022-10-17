@@ -4,10 +4,13 @@ import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDto
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDtoResponse;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
 import com.nttdata.bootcamp.project.CustomerProduct.entity.CustomerProductActive;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
-
+@AllArgsConstructor
 public class CustomerProductActiveMapper implements ICustomerProductActiveMapper
 {
+    private String uri;
+    private String uri2;
     @Override
     public CustomerProductActiveDtoRequest toDtoRequest(CustomerProductActive customerProductActive) {
         CustomerProductActiveDtoRequest customerProductPassiveDtoRequest = new CustomerProductActiveDtoRequest();
@@ -26,8 +29,8 @@ public class CustomerProductActiveMapper implements ICustomerProductActiveMapper
     public CustomerProductActiveDtoResponse toDtoResponse(CustomerProductActive customerProductActive) {
         CustomerProductActiveDtoResponse customerProductActiveDtoResponse = new CustomerProductActiveDtoResponse();
         BeanUtils.copyProperties(customerProductActive, customerProductActiveDtoResponse);
-        customerProductActiveDtoResponse.setCustomerUrl("/api/v1/customers/" + customerProductActive.getCustomerId());
-        customerProductActiveDtoResponse.setProductUrl("/api/v1/products/" + customerProductActive.getProductId());
+        customerProductActiveDtoResponse.setCustomerUrl(uri + customerProductActive.getCustomerId());
+        customerProductActiveDtoResponse.setProductUrl(uri2 + customerProductActive.getProductId());
         return customerProductActiveDtoResponse;
     }
 }

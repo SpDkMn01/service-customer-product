@@ -2,10 +2,8 @@ package com.nttdata.bootcamp.project.CustomerProduct.controller;
 
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDtoRequest;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDtoResponse;
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
-import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoResponse;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductActiveService;
-import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductPassiveService;
+import com.nttdata.bootcamp.project.CustomerProduct.service.ICustomerProductActiveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,30 +19,30 @@ import reactor.core.publisher.Mono;
 @RefreshScope
 public class CustomerProductActiveController {
     @Autowired
-    private CustomerProductActiveService customerProductActiveService;
+    private ICustomerProductActiveService service;
     @GetMapping
-    public Flux<CustomerProductActiveDtoResponse> getCustomerProductActives()
+    public Flux<CustomerProductActiveDtoResponse> getAll()
     {
-        return customerProductActiveService.getAll();
+        return service.getAll();
     }
     @GetMapping(path="/{id}")
-    public Mono<CustomerProductActiveDtoResponse> getCustomerProductActive(@PathVariable String id)
+    public Mono<CustomerProductActiveDtoResponse> getById(@PathVariable String id)
     {
-        return customerProductActiveService.getById(id);
+        return service.getById(id);
     }
     @PostMapping
-    public Mono<CustomerProductActiveDtoResponse> saveCustomerProductActive(@RequestBody Mono<CustomerProductActiveDtoRequest> customerProductActiveDtoRequestMono)
+    public Mono<CustomerProductActiveDtoResponse> save(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono)
     {
-        return customerProductActiveService.save(customerProductActiveDtoRequestMono);
+        return service.save(requestMono);
     }
     @PutMapping("/update/{id}")
-    public Mono<CustomerProductActiveDtoResponse> updateCustomerProductActive(@RequestBody Mono<CustomerProductActiveDtoRequest> customerProductActiveDtoRequestMono, @PathVariable String id)
+    public Mono<CustomerProductActiveDtoResponse> update(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono, @PathVariable String id)
     {
-        return customerProductActiveService.update(customerProductActiveDtoRequestMono,id);
+        return service.update(requestMono,id);
     }
     @DeleteMapping("/delete/{id}")
-    public Mono<Void> deleteCustomerProductActive(@PathVariable String id)
+    public Mono<Void> delete(@PathVariable String id)
     {
-        return customerProductActiveService.delete(id);
+        return service.delete(id);
     }
 }

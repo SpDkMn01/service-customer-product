@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerProductActiveDtoRequest
 {
-    private String id;
     private String customerId;
     private String productId;
     private double monto;

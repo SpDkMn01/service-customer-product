@@ -18,3 +18,5 @@ server:
 message:
   path-customerProductPassive: /api/v1/customerProductsPassive
   path-customerProductActive: /api/v1/customerProductsActive
+  uri: /api/v1/customers/
+  uri2: /api/v1/products/
