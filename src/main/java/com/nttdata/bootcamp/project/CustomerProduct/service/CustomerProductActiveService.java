@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerProductActiveService implements ICustomerProductPassiveService<CustomerProductActiveDtoRequest, CustomerProductActiveDtoResponse>
+public class CustomerProductActiveService implements ICustomerProductActiveService<CustomerProductActiveDtoRequest, CustomerProductActiveDtoResponse>
 {
     @Value("${message.uri}")
     String uri;
