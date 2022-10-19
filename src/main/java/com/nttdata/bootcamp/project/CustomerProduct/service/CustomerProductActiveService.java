@@ -22,23 +22,25 @@ public class CustomerProductActiveService implements ICustomerProductActiveServi
     String uri2;
     @Autowired
     private final ICustomerProductActiveRepository repository;
+    @Autowired
+    private final ICustomerProductActiveMapper mapper;
     @Override
     public Flux<CustomerProductActiveDtoResponse> getAll() {
-        ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
+        //ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
         return repository.findAll()
                 .map(mapper::toDtoResponse);
     }
     @Override
     public Mono<CustomerProductActiveDtoResponse> getById(String id)
     {
-        ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
+        //ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
         return repository.findById(id)
                 .map(mapper::toDtoResponse);
     }
     @Override
     public Mono<CustomerProductActiveDtoResponse> save(Mono<CustomerProductActiveDtoRequest> object)
     {
-        ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
+        //ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
         return object.map(mapper::toEntity)
                 .flatMap(repository::insert)
                 .map(mapper::toDtoResponse);
@@ -46,7 +48,7 @@ public class CustomerProductActiveService implements ICustomerProductActiveServi
     @Override
     public Mono<CustomerProductActiveDtoResponse> update(Mono<CustomerProductActiveDtoRequest> object, String id)
     {
-        ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
+        //ICustomerProductActiveMapper mapper = new CustomerProductActiveMapper(uri, uri2);
         return repository.findById(id)
                 .flatMap(
                         p -> object.map(mapper::toEntity)

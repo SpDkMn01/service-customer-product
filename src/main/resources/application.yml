@@ -20,3 +20,4 @@ message:
   path-customerProductActive: /api/v1/customerProductsActive
   uri: /api/v1/customers/
   uri2: /api/v1/products/
+  endPointCustomer: http://localhost:8094/api/v1/customers/

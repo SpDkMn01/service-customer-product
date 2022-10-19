@@ -5,8 +5,12 @@ import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductActiveDto
 import com.nttdata.bootcamp.project.CustomerProduct.dto.CustomerProductPassiveDtoRequest;
 import com.nttdata.bootcamp.project.CustomerProduct.entity.CustomerProductActive;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-@AllArgsConstructor
+import org.springframework.stereotype.Component;
+
+@RequiredArgsConstructor
+@Component
 public class CustomerProductActiveMapper implements ICustomerProductActiveMapper
 {
     private String uri;
