@@ -3,9 +3,14 @@ package com.nttdata.bootcamp.project.CustomerProduct.controller;
 import com.nttdata.bootcamp.project.CustomerProduct.dto.*;
 import com.nttdata.bootcamp.project.CustomerProduct.service.CustomerProductActiveService;
 import com.nttdata.bootcamp.project.CustomerProduct.service.ICustomerProductActiveService;
+import com.nttdata.bootcamp.project.CustomerProduct.utils.CustomerProductPassiveMapper;
+import com.nttdata.bootcamp.project.CustomerProduct.utils.ICustomerProductActiveMapper;
+import com.nttdata.bootcamp.project.CustomerProduct.utils.ICustomerProductPassiveMapper;
+import com.nttdata.bootcamp.project.CustomerProduct.utils.exception.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +27,10 @@ import java.util.Objects;
 public class CustomerProductActiveController {
     @Autowired
     private ICustomerProductActiveService service;
+    @Autowired
+    private final ICustomerProductActiveMapper mapper;
+    @Value("${message.endPointCustomer}")
+    String endPointCustomer;
     @GetMapping
     public Flux<CustomerProductActiveDtoResponse> getAll()
     {
@@ -35,11 +44,12 @@ public class CustomerProductActiveController {
     @PostMapping
     public Mono<CustomerProductActiveDtoResponse> save(@RequestBody Mono<CustomerProductActiveDtoRequest> requestMono)
     {
-        String uri = "http://localhost:8094/api/v1/customers/63484f54098ba16f2bbe2439";
+        //String uri = endPointCustomer + requestMono.map(mapper::toEntity).doOnNext(e -> e.getCustomerId());
+        String uri = endPointCustomer + requestMono.doOnNext(p -> p.getCustomerId());
         RestTemplate restTemplate = new RestTemplate();
         CustomerGetByIdResponse result = restTemplate.getForObject(uri, CustomerGetByIdResponse.class);
         if (Objects.isNull(result)) {
-            //lanzar throw personalizado
+            throw new EntityNotFoundException("Customer not found");
         }
         return service.save(requestMono);
     }
