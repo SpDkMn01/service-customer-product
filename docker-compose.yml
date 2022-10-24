@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  db_customer_product:
+    image: mongo
+    container_name: db_customer_product
+    ports:
+      - "27019:27017"
+    environment:
+      - "MONGO_INITDB_DATABASE=bootcamp_customer_product_db"
+  service-customer-product:
+    image: service-customer-product
+    container_name: service-customer-product
+    depends_on:
+      - db_customer_product
+    ports:
+      - "8009:8000"
