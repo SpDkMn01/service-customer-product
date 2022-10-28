@@ -1,7 +1,13 @@
 package com.nttdata.bootcamp.project.CustomerProduct.dto;
 
-public class CustomerProductPassiveDtoRequest
-{
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CustomerProductPassiveDtoRequest {
     private String customerId;
     private String productId;
     private int maintenance;

@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerProductPassiveDtoResponse
-{
+public class CustomerProductPassiveDtoResponse {
     private String id;
     private String customerUrl;
     private String productUrl;

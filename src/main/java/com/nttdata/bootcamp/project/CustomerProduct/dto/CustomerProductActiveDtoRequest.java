@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerProductActiveDtoRequest
-{
+public class CustomerProductActiveDtoRequest {
     private String customerId;
     private String productId;
     private double amount;
